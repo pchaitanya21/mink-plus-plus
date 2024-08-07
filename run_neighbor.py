@@ -24,15 +24,15 @@ def convert_huggingface_data_to_list_dic(dataset):
 # arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default='EleutherAI/pythia-2.8b')
-parser.add_argument(
-    '--dataset', type=str, default='WikiMIA_length32', 
-    choices=[
-        'WikiMIA_length32', 'WikiMIA_length64', 'WikiMIA_length128', 
-        'WikiMIA_length32_paraphrased',
-        'WikiMIA_length64_paraphrased',
-        'WikiMIA_length128_paraphrased', 
-    ]
-)
+# parser.add_argument(
+#     '--dataset', type=str, default='WikiMIA_length32', 
+#     choices=[
+#         'WikiMIA_length32', 'WikiMIA_length64', 'WikiMIA_length128', 
+#         'WikiMIA_length32_paraphrased',
+#         'WikiMIA_length64_paraphrased',
+#         'WikiMIA_length128_paraphrased', 
+#     ]
+# )
 parser.add_argument('--half', action='store_true')
 parser.add_argument('--int8', action='store_true')
 args = parser.parse_args()
@@ -66,10 +66,10 @@ def load_model(name):
 model, tokenizer = load_model(args.model)
 
 # load dataset
-if not 'paraphrased' in args.dataset:
-    dataset = pd.read_csv('spanish_prompt(50).csv')
+
+dataset = pd.read_csv('spanish_prompt(50).csv')
     # load_dataset('swj0419/WikiMIA', split=args.dataset)
-else: dataset = pd.read_csv('spanish_prompt(50).csv')
+# else: dataset = pd.read_csv('spanish_prompt(50).csv')
     
     # dataset = load_dataset('zjysteven/WikiMIA_paraphrased_perturbed', split=args.dataset)
 data = convert_huggingface_data_to_list_dic(dataset)
@@ -132,7 +132,7 @@ for method, scores in scores.items():
 df = pd.DataFrame(results)
 print(df)
 
-save_root = f"results/{args.dataset}"
+save_root = f"results/pythia_spanish"
 if not os.path.exists(save_root):
     os.makedirs(save_root)
 

@@ -77,6 +77,7 @@ perturbed_dataset = load_dataset(
     split=args.dataset + '_perturbed'
 )
 perturbed_data = convert_huggingface_data_to_list_dic(perturbed_dataset)
+print(perturbed_data[0])
 num_neighbors = len(perturbed_data) // len(data)
 
 # inference - get scores for each input

@@ -67,7 +67,7 @@ model, tokenizer = load_model(args.model)
 
 # load dataset
 
-dataset = pd.read_csv('spanish_prompt(50).csv')
+dataset = pd.read_csv('spanish_prompt(150).csv')
     # load_dataset('swj0419/WikiMIA', split=args.dataset)
 # else: dataset = pd.read_csv('spanish_prompt(50).csv')
     

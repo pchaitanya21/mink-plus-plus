@@ -14,13 +14,18 @@ from datasets import load_dataset
 
 
 # helper functions
+# def convert_huggingface_data_to_list_dic(dataset):
+#     all_data = []
+#     for i in range(len(dataset)):
+#         ex = dataset[i]
+#         all_data.append(ex)
+#     return all_data
 def convert_huggingface_data_to_list_dic(dataset):
     all_data = []
     for i in range(len(dataset)):
-        ex = dataset[i]
+        ex = dataset.iloc[i].to_dict()  # Convert row to dictionary
         all_data.append(ex)
     return all_data
-
 # arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default='EleutherAI/pythia-2.8b')

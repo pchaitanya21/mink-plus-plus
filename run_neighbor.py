@@ -24,15 +24,15 @@ def convert_huggingface_data_to_list_dic(dataset):
 # arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default='EleutherAI/pythia-2.8b')
-parser.add_argument(
-    '--dataset', type=str, default='WikiMIA_length32', 
-    choices=[
-        'WikiMIA_length32', 'WikiMIA_length64', 'WikiMIA_length128', 
-        'WikiMIA_length32_paraphrased',
-        'WikiMIA_length64_paraphrased',
-        'WikiMIA_length128_paraphrased', 
-    ]
-)
+# parser.add_argument(
+#     '--dataset', type=str, default='WikiMIA_length32', 
+#     choices=[
+#         'WikiMIA_length32', 'WikiMIA_length64', 'WikiMIA_length128', 
+#         'WikiMIA_length32_paraphrased',
+#         'WikiMIA_length64_paraphrased',
+#         'WikiMIA_length128_paraphrased', 
+#     ]
+# )
 parser.add_argument('--half', action='store_true')
 parser.add_argument('--int8', action='store_true')
 args = parser.parse_args()

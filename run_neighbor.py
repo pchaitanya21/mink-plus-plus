@@ -143,6 +143,19 @@ save_root = f"results/pythia_spanish"
 if not os.path.exists(save_root):
     os.makedirs(save_root)
 
+
+roc_data = {
+    'fpr': results['fpr95'],  # Assuming you want to save fpr95 in ROC data
+    'tpr': results['tpr05'],  # Assuming you want to save tpr05 in ROC data
+}
+
+model_id = args.model.split('/')[-1]
+
+# Save ROC data to CSV
+roc_data_df = pd.DataFrame(roc_data)
+roc_data_df.to_csv(os.path.join(save_root, f"{model_id}_roc_data.csv"), index=False)
+
+
 model_id = args.model.split('/')[-1]
 if os.path.isfile(os.path.join(save_root, f"{model_id}.csv")):
     df.to_csv(os.path.join(save_root, f"{model_id}.csv"), index=False, mode='a', header=False)

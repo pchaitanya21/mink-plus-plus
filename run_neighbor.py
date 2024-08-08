@@ -74,14 +74,14 @@ model, tokenizer = load_model(args.model)
 
 # load dataset
 
-dataset = pd.read_csv('spanish_prompt(150).csv')
+dataset = pd.read_csv('swahili(150)_prompt.csv')
     # load_dataset('swj0419/WikiMIA', split=args.dataset)
 # else: dataset = pd.read_csv('spanish_prompt(50).csv')
     
     # dataset = load_dataset('zjysteven/WikiMIA_paraphrased_perturbed', split=args.dataset)
 data = convert_huggingface_data_to_list_dic(dataset)
 
-perturbed_dataset = pd.read_csv('spanish_perturbed(150).csv') 
+perturbed_dataset = pd.read_csv('swahili(150)_perturbed.csv') 
 
 
 # load_dataset(

@@ -30,7 +30,7 @@ conda activate mia-try
 
 # pip install -r requirements.txt
 # Run the main script
-python run_neighbor_swa.py 
+python run_neighbor_swa.py --dataset 'finnish(150)_prompt.csv'
 #python main.py --N 1000 --batch-size 10 --model1 EleutherAI/pythia-2.8b --model2 EleutherAI/pythia-410m --cor
 
 conda deactivate 

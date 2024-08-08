@@ -139,7 +139,7 @@ for method, scores in scores.items():
 df = pd.DataFrame(results)
 print(df)
 
-save_root = f"results/pythia_spanish"
+save_root = f"results/pythia_swahili"
 if not os.path.exists(save_root):
     os.makedirs(save_root)
 

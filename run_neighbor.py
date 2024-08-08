@@ -82,7 +82,7 @@ dataset = pd.read_csv(args.dataset)
     # dataset = load_dataset('zjysteven/WikiMIA_paraphrased_perturbed', split=args.dataset)
 data = convert_huggingface_data_to_list_dic(dataset)
 
-perturbed_dataset = pd.read_csv('finnish(150)_perturbed.csv') 
+perturbed_dataset = pd.read_csv('swahili(150)_perturbed.csv') 
 
 
 # load_dataset(
@@ -129,7 +129,7 @@ def get_metrics(scores, labels):
     'FPR': fpr_list,
     'TPR': tpr_list})
     # Save the DataFrame to a CSV file
-    df.to_csv('fpr_tpr_data_fin.csv', index=False)
+    df.to_csv('fpr_tpr_data_swa.csv', index=False)
     
     return auroc, fpr95, tpr05
 

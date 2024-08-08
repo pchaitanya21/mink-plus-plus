@@ -82,7 +82,7 @@ dataset = pd.read_csv(args.dataset)
     # dataset = load_dataset('zjysteven/WikiMIA_paraphrased_perturbed', split=args.dataset)
 data = convert_huggingface_data_to_list_dic(dataset)
 
-perturbed_dataset = pd.read_csv('finnish(150)_perturbed.csv') 
+perturbed_dataset = pd.read_csv('swahili(150)_perturbed.csv') 
 
 
 # load_dataset(
@@ -166,7 +166,7 @@ for method, data in roc_data.items():
         'fpr': data['fpr'],
         'tpr': data['tpr']
     })
-    df_roc.to_csv(os.path.join(save_root, f"{method}_roc_data.csv"), index=False)
+    df_roc.to_csv("swahili_roc_data.csv", index=False)
 
 # Save combined ROC data to CSV
 model_id = args.model.split('/')[-1]

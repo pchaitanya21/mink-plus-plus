@@ -82,7 +82,7 @@ dataset = pd.read_csv(args.dataset)
     # dataset = load_dataset('zjysteven/WikiMIA_paraphrased_perturbed', split=args.dataset)
 data = convert_huggingface_data_to_list_dic(dataset)
 
-perturbed_dataset = pd.read_csv('swahili(150)_perturbed.csv') 
+perturbed_dataset = pd.read_csv('spanish_perturbed(150).csv') 
 
 
 # load_dataset(

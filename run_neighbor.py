@@ -125,6 +125,12 @@ def get_metrics(scores, labels):
     auroc = auc(fpr_list, tpr_list)
     fpr95 = fpr_list[np.where(tpr_list >= 0.95)[0][0]]
     tpr05 = tpr_list[np.where(fpr_list <= 0.05)[0][-1]]
+    df = pd.DataFrame({
+    'FPR': fpr_list,
+    'TPR': tpr_list})
+    # Save the DataFrame to a CSV file
+    df.to_csv('fpr_tpr_data_spa.csv', index=False)
+    
     return auroc, fpr95, tpr05
 
 labels = [d['label'] for d in data] # 1: training, 0: non-training
@@ -166,7 +172,7 @@ for method, data in roc_data.items():
         'fpr': data['fpr'],
         'tpr': data['tpr']
     })
-    df_roc.to_csv("spanish_roc_data.csv", index=False)
+    
 
 # Save combined ROC data to CSV
 model_id = args.model.split('/')[-1]

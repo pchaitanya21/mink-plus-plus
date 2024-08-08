@@ -40,6 +40,7 @@ parser.add_argument('--model', type=str, default='EleutherAI/pythia-2.8b')
 #         'WikiMIA_length128_paraphrased', 
 #     ]
 # )
+parser.add_argument('--dataset', type=str, default='spanish_prompt(150).csv')
 parser.add_argument('--half', action='store_true')
 parser.add_argument('--int8', action='store_true')
 args = parser.parse_args()
@@ -74,14 +75,14 @@ model, tokenizer = load_model(args.model)
 
 # load dataset
 
-dataset = pd.read_csv('swahili(150)_prompt.csv')
+dataset = pd.read_csv(args.dataset)
     # load_dataset('swj0419/WikiMIA', split=args.dataset)
 # else: dataset = pd.read_csv('spanish_prompt(50).csv')
     
     # dataset = load_dataset('zjysteven/WikiMIA_paraphrased_perturbed', split=args.dataset)
 data = convert_huggingface_data_to_list_dic(dataset)
 
-perturbed_dataset = pd.read_csv('swahili(150)_perturbed.csv') 
+perturbed_dataset = pd.read_csv('spanish_perturbed(150).csv') 
 
 
 # load_dataset(
@@ -139,21 +140,36 @@ for method, scores in scores.items():
 df = pd.DataFrame(results)
 print(df)
 
-save_root = f"results/pythia_swahili"
+save_root = f"results/{args.dataset}-{args.model.split('/')[-1]}"
 if not os.path.exists(save_root):
     os.makedirs(save_root)
 
 
-roc_data = {
-    'fpr': results['fpr95'],  # Assuming you want to save fpr95 in ROC data
-    'tpr': results['tpr05'],  # Assuming you want to save tpr05 in ROC data
-}
 
+metrics_file = os.path.join(save_root, "metrics.csv")
+df.to_csv(metrics_file, index=False)
+
+# Save ROC Data for plotting
+
+# Save ROC Data for plotting
+roc_data = {}
+for method, scores in scores.items():
+    _, _, _, fpr, tpr = get_metrics(scores, labels)
+    roc_data[method] = {
+        'fpr': fpr,
+        'tpr': tpr
+    }
+
+# Save ROC data to CSV for each method
+for method, data in roc_data.items():
+    df_roc = pd.DataFrame({
+        'fpr': data['fpr'],
+        'tpr': data['tpr']
+    })
+    df_roc.to_csv(os.path.join(save_root, f"{method}_roc_data.csv"), index=False)
+
+# Save combined ROC data to CSV
 model_id = args.model.split('/')[-1]
-
-# Save ROC data to CSV
-roc_data_df = pd.DataFrame(roc_data)
-roc_data_df.to_csv(os.path.join(save_root, f"{model_id}_roc_data.csv"), index=False)
 
 
 model_id = args.model.split('/')[-1]
